@@ -12,6 +12,10 @@ class Context
     }
   end
 
+  def self.auth_url
+    api.connect_tokens.create(CONTEXT_CALLBACK_URL).browser_redirect_url
+  end
+
   def self.api
     @api ||= ContextIO.new(ENV['CONTEXT_API_KEY'], ENV['CONTEXT_SECRET'])
   end
