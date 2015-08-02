@@ -1,7 +1,7 @@
 class ContextioController < ApplicationController
 
   def auth
-    render json: {}
+    redirect_to(Context.auth_url)
   end
 
   def callback
