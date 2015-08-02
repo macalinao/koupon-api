@@ -16,6 +16,14 @@ class Context
     api.connect_tokens.create(CONTEXT_CALLBACK_URL).browser_redirect_url
   end
 
+  def self.create_user(contextio_token)
+    account = api.connect_tokens[contextio_token].account
+    User.create({
+      name: "#{account.first_name} #{account.last_name}",
+      contextio_account: account.id
+    })
+  end
+
   def self.api
     @api ||= ContextIO.new(ENV['CONTEXT_API_KEY'], ENV['CONTEXT_SECRET'])
   end
