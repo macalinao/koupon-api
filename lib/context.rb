@@ -1,4 +1,9 @@
 class Context
+
+  def self.parse_inbox(account)
+    account.messages.map { |message| parts_from_message(message) }
+  end
+
   def self.parts_from_message(message)
     {
       subject: message.subject,
