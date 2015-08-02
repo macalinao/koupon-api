@@ -17,7 +17,13 @@ class Context
   end
 
   def self.create_user(contextio_token)
-    account = api.connect_tokens[contextio_token].account
+    token = api.connect_tokens[contextio_token]
+    begin
+      account = token.account
+    rescue
+      return nil
+    end
+    token.delete
     exists = User.find_by_contextio_account(account.id)
     exists || User.create({
       name: "#{account.first_name} #{account.last_name}",

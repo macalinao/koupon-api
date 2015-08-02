@@ -8,13 +8,20 @@ Bundler.require(*Rails.groups)
 
 module KouponApi
   class Application < Rails::Application
-    before_filter :setup_user
 
     config.autoload_paths << Rails.root.join('lib')
     config.active_record.raise_in_transactional_callbacks = true
 
-    def setup_user
-      @user = User.find_by_token(params[:token])
+    def authenticate
+      @user = User.find_by_token(params[:access_token])
+    end
+
+    def force_authenticate
+      if @user.blank?
+        render status: 401, json: {
+          error: "Unauthorized"
+        }
+      end
     end
 
   end

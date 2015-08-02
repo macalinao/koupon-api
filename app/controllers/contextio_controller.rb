@@ -7,9 +7,15 @@ class ContextioController < ApplicationController
   def callback
     token = params[:contextio_token]
     user = Context.create_user(token)
-    render json: {
-      token: user.token
-    }
+    if user.blank?
+      render status: 401, json: {
+        error: "Invalid token"
+      }
+    else
+      render json: {
+        token: user.token
+      }
+    end
   end
 
 end
