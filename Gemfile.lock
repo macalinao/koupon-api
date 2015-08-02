@@ -66,6 +66,8 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    has_secure_token (1.0.0)
+      activerecord (>= 3.0)
     i18n (0.7.0)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
@@ -158,6 +160,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   contextio
   dotenv-rails
+  has_secure_token
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.1)

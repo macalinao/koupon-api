@@ -18,7 +18,8 @@ class Context
 
   def self.create_user(contextio_token)
     account = api.connect_tokens[contextio_token].account
-    User.create({
+    exists = User.find_by_contextio_account(account.id)
+    exists || User.create({
       name: "#{account.first_name} #{account.last_name}",
       contextio_account: account.id
     })
@@ -27,4 +28,5 @@ class Context
   def self.api
     @api ||= ContextIO.new(ENV['CONTEXT_API_KEY'], ENV['CONTEXT_SECRET'])
   end
+
 end

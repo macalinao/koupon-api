@@ -7,7 +7,9 @@ class ContextioController < ApplicationController
   def callback
     token = params[:contextio_token]
     user = Context.create_user(token)
-    render json: user
+    render json: {
+      token: user.token
+    }
   end
 
 end
